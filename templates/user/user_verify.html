@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include '../include/header.html' %}
+</head>
+
+<body>
+    {% include '../components/user_navbar.html' %}
+
+    <div class="container">
+        <div class="d-flex justify-content-center my-5">
+            <div class="card w-50 p-5">
+                <h3 class="card-title text-center">Your Age is <span class="text-primary">{{user_age}}</span></h3>
+                <!-- <p class="card-text text-center">procedure for user verification</p> -->
+
+                {% if is_eligible %}
+                <form action="/user/verify/" method="POST" class="mt-4">
+                    <input type="number" name="Aadhaar" id="Aadhaar" class="form-control mb-3"
+                        onchange="getUserDetails(this.value)" placeholder="Aadhaar number" minlength="12" maxlength="12"
+                        autocomplete="off" required />
+
+                    <div id="details-block">
+
+                    </div>
+                    ̥
+                    <button type="submit" class="btn btn-primary w-100" id="submit">Verify</button>
+                </form>
+                {% else %}
+                <div class="alert alert-danger text-center mt-4" role="alert">
+                    You are not Eligible to vote
+                </div>
+                {% endif %}
+
+                {% if user_verified %}
+                {% if user_found == 0 %}
+                <div class="alert alert-danger text-center mt-4" role="alert">
+                    Unknown User
+                </div>
+                {% endif %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function getUserDetails(aadharNumber) {
+            const baseUrl = "/user/getUser/";
+            const params = {
+                aadhar: aadharNumber
+            };
+            const queryString = new URLSearchParams(params).toString();
+            const apiUrl = `${baseUrl}?${queryString}`;
+            const divElement = document.getElementById('details-block');
+            divElement.innerHTML = '';
+            const buttonElement = document.getElementById('submit');
+            buttonElement.disabled = true;
+            buttonElement.type = 'button';
+
+            fetch(apiUrl)
+                .then(response => {
+                    // Check if the response is successful (status code in the range 200-299)
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    // Parse the JSON response
+                    return response.json();
+                })
+                .then(data => {
+                    // Handle the data received
+                    console.log('Received data:', data);
+                    if (data.status) {
+                        const resData = data.data;
+                        let block = `
+                        <ul class="list-group mb-4">
+                            <li class="list-group-item" aria-current="true">Name : ${resData.name} </li>
+                            <li class="list-group-item">Contact : ${resData.phone} </li>
+                            <li class="list-group-item">Email : ${resData.email} </li>
+                            <li class="list-group-item">D.O.B : ${resData.dob} </li>
+                            <li class="list-group-item">Constituency : ${resData.constituency} </li>
+                        </ul>
+                        
+                        `;
+                        divElement.innerHTML += block;
+                        buttonElement.disabled = false;
+                        buttonElement.type = 'submit';
+                    }
+                    // Process the data as needed, e.g., update UI
+                })
+                .catch(error => {
+                    // Handle any errors that occurred during the fetch
+                    console.error('Fetch error:', error);
+                    // Display an error message or retry the request
+                });
+        }
+    </script>
+</body>
+
+</html>

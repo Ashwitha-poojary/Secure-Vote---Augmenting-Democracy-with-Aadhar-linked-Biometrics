@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'include/header.html' %}
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    {% comment %} NavBar {% endcomment %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-4" href="/">E-Voting</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto me-4 mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" aria-current="page" href="/admin/login/">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" aria-current="page" href="/user/login/">User</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="d-flex justify-content-center my-5">
+            <div class="card w-25 p-3">
+                <div class="card-header bg-white">
+                    <h4>Admin Login</h4>
+                </div>
+                <form action="/admin/login/" method="POST" class="card-body">
+                    <input type="hidden" name="action" value="adminLogin" />
+                    <input type="text" name="username" class="form-control mb-3" placeholder="Username" autocomplete="off" required />
+                    <input type="password" name="password" class="form-control mb-3" placeholder="Password" autocomplete="off" required />
+                    <button type="submit" class="btn btn-primary bg-gradient w-100">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

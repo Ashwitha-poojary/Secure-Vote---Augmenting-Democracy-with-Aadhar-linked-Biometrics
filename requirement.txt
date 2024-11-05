@@ -1,0 +1,31 @@
+I am a recent graduate with a Bachelor of Business Administration (BBA) from Utkal University, Bhubaneswar, Odisha, completed in 2024. While my academic background is in business, But I have developed a strong passion for technology and data. To align my career with my interests, I have acquired a diverse skill set in data engineering and IT tools.
+
+I have developed a robust skill set that includes:
+
+SQL
+
+MySQL Python
+
+• ETL pipeline
+
+Azure Data factory
+
+Azure Databricks & PySpark
+
+Azure Data Lake Storage (ADIS) Gen2
+
+Azure key vault. Azure SQL
+Azure DevOps Synapse
+
+Docker & Kubernetes
+
+Git & GitHub
+
+• Big Data & Hadoop
+
+Linux
+
+I am eager to start my career as a Data Engineer, where I can apply my technical skills to solve real-world data challenges. As a fresher. I am enthusiastic about learning and growing in this field, and I am actively seeking opportunities to contribute to innovative projects and collaborate with industry professionals
+
+
+I am a recent graduate with a Bachelor of Engineering in Information Science and Engineering from A J Institute of Engineering and Technology,Mangalore. I have successfully completed several projects and internships that have honed my technical skills and problem-solving abilities.

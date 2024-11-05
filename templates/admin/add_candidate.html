@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include '../include/header.html' %}
+</head>
+<body>
+    {% include '../components/admin_navbar.html' %}
+
+    <div class="container">
+        <div class="d-flex justify-content-center my-5">
+            <div class="card w-50 p-3">
+                <div class="card-header bg-white">
+                    <h4>Add Candidate</h4>
+                </div>
+                <form action="/admin/candidate/add/" method="POST" class="card-body" onsubmit="return validate_registration()" enctype="multipart/form-data">
+                    <input type="text" name="name" id="name" class="form-control mb-3" placeholder="Full Name" autocomplete="off" />
+
+                    <label>Date of Birth</label>
+                    <input type="date" name="dob" id="dob" class="form-control mb-3" />
+
+                    <label>Select Party</label>
+                    <select class="form-select mb-3" name="party" aria-label="Default select example">
+                        {% for opt in party_list %}
+                        <option value="{{opt.id}}">{{opt.title}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label>Select Constituency</label>
+                    <select class="form-select mb-3" name="constituency" aria-label="Default select example">
+                        {% for opt in constituency_list %}
+                        <option value="{{opt.id}}">{{opt.title}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label>Upload Image</label>
+                    <input type="file" accept="image/*" name="image" id="image" class="form-control mb-3" />
+                    
+                    <button type="submit" class="btn btn-primary bg-gradient">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% if success %}
+    <script type="text/javascript">alert({success});</script>
+    {% endif %}
+    {% if error %}
+    <script type="text/javascript">alert({error});</script>
+    {% endif %}
+
+    <script type="text/javascript">
+        function validate_registration(){
+            var name=document.getElementById("name").value;
+            var dob=document.getElementById("dob").value;
+            var image=document.getElementById("image").value;
+            var reg = /\S+@\S+\.\S+/;
+
+            if(name == ""){
+               alert("Please Enter Name")
+               return false;
+            }
+            if(dob == ""){
+               alert("Please Enter DOB")
+               return false;
+            }
+            if(image == ""){
+               alert("Please upload Image")
+               return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

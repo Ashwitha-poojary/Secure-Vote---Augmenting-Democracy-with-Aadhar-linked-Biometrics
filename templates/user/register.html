@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'include/header.html' %}
+</head>
+<body>
+    {% comment %} NavBar {% endcomment %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-4" href="/">Secure Vote</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto me-4 mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" aria-current="page" href="/admin/login/">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2" aria-current="page" href="/user/login/">User</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="d-flex justify-content-center my-5">
+            <div class="card w-50 p-3">
+                <div class="card-header bg-white">
+                    <h4>Create a New Account</h4>
+                </div>
+                <form action="/user/register/" method="POST" class="card-body" onsubmit="return validate_registration()">
+                    <input type="hidden" name="action" value="addCustomer" />
+                    <input type="text" name="name" id="name" class="form-control mb-3" placeholder="Full Name" autocomplete="off" />
+                    <input type="email" name="email" id="email" class="form-control mb-3" placeholder="Email Address" autocomplete="off" />
+                    <input type="text" name="phone" id="phone" class="form-control mb-3" placeholder="Phone Number" autocomplete="off" />
+                    <input type="number" name="Aadhaar" id="Aadhaar" class="form-control mb-3" placeholder="Aadhaar number" minlength="12" maxlength="12" autocomplete="off" />
+                    <input type="password" name="password" id="password" class="form-control mb-3" placeholder="Password" autocomplete="off" />
+                    <label>Date of Birth</label>
+                    <input type="date" name="dob" id="dob" class="form-control mb-3" />
+
+                    <label>Select Constituency</label>
+                    <select class="form-select mb-3" name="constituency" aria-label="Default select example">
+                        {% for opt in options %}
+                        <option value="{{opt.id}}">{{opt.title}}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <button type="submit" class="btn btn-primary bg-gradient">Register</button>
+                    <a href="/user/login/" class="btn btn-outline-primary">Back to Login</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% if success %}
+    <script type="text/javascript">alert({success});</script>
+    {% endif %}
+    {% if error %}
+    <script type="text/javascript">alert({error});</script>
+    {% endif %}
+
+    <script type="text/javascript">
+        function validate_registration(){
+            var name=document.getElementById("name").value;
+            var email=document.getElementById("email").value;
+            var phone=document.getElementById("phone").value;
+            var Aadhaar=document.getElementById("Aadhaar").value;
+            var password=document.getElementById("password").value;
+            var dob=document.getElementById("dob").value;
+            var reg = /\S+@\S+\.\S+/;
+
+            if(name == ""){
+               alert("Please Enter Name")
+               return false;
+            }
+            if(email == ""){
+               alert("Please Enter Email ID")
+               return false;
+            }
+            if(!reg.test(email)){
+               alert("Invalid Email ID")
+               return false;
+            }
+            if(phone == ""){
+               alert("Please Enter Phone Number")
+               return false;
+            }
+            if(phone.length != 10){
+               alert("Please enter Valid mobile number")
+               return false;
+            }
+            if(Aadhaar.length != 12){
+               alert("Please enter Valid Addhaar number")
+               return false;
+            }
+            if(password == ""){
+               alert("Please Enter Password")
+               return false;
+            }
+            if(dob == ""){
+               alert("Please Enter DOB")
+               return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

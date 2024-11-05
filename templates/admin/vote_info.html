@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include '../include/header.html' %}
+</head>
+<body>
+    {% include '../components/admin_navbar.html' %}
+
+    <div class="container">
+        <div class="d-flex justify-content-center align-items-center flex-column my-5">
+            <div class="card w-50 p-4">
+                <h3 class="card-title text-center">Voting Date</h3>
+                {% if vote_date != "" %}
+                <p class="card-text text-center">{{vote_date}}</p>
+                {% endif %}
+
+                <form action="/admin/info/" method="POST" class="mt-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <input type="date" name="date" class="form-control me-3" />
+                        <button type="submit" class="btn btn-primary w-50">Save</button>
+                    </div>
+                </form>
+            </div>
+
+            {% if vote_date != "" %}
+            <div class="card w-50 p-4 mt-4">
+                <form action="/user/verification/" method="POST">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="card-title text-center">Result Visiblity</h3>
+                        {%if result_status == 1%}
+                        <a href="/admin/result/status/{{result_status}}" class="btn btn-secondary w-50">Hide</a>
+                        {%else%}
+                        <a href="/admin/result/status/{{result_status}}" class="btn btn-secondary w-50">Show</a>
+                        {%endif%}
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

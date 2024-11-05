@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include '../include/header.html' %}
+</head>
+<body>
+    {% include '../components/admin_navbar.html' %}
+
+    <div class="container-fluid p-5">
+        <h2 class="title-md mb-5">Users</h2>
+                
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Contact no</th>
+                            <th>Constituency</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in users %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{data.name}}</td>
+                            <td>{{data.phone}}</td>
+                            <td>{{data.constituency.title}}</td>
+                            <td>
+                                {%if data.status == 1%}
+                                <a href="/admin/user/status/{{data.id}}" class="btn btn-warning bg-gradient btn-sm">Deactivate</a>
+                                {%else%}
+                                <a href="/admin/user/status/{{data.id}}" class="btn btn-success bg-gradient btn-sm">Activate</a>
+                                {%endif%}
+                                <a href="/user/verification/{{data.id}}" class="btn btn-primary bg-gradient btn-sm">Authenticate</a>
+
+                            </td>
+                          
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

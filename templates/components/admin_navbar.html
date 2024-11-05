@@ -1,0 +1,32 @@
+{% comment %} NavBar {% endcomment %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3">
+    <div class="container-fluid">
+        <a class="navbar-brand ms-4" href="/admin/">E-Voting</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto ms-4 mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link mx-2" aria-current="page" href="/admin/user/">Users</a>
+                </li>
+                <li class="nav-item dropdown mx-2">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Candidates
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/admin/candidate/add/">Add</a></li>
+                      <li><a class="dropdown-item" href="/admin/candidate/">Manage</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2" aria-current="page" href="/admin/info/">Vote Info</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link mx-2" aria-current="page" href="/admin/payment/">Payment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mx-2" aria-current="page" href="/feedbacks/">Feedbacks</a>
+                </li> -->
+            </ul>
+        </div>
+        <a href="/logout/" class="btn btn-outline-light btn-gradient me-4">Logout</a>
+    </div>
+</nav>
